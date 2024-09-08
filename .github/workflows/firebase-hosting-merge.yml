@@ -16,21 +16,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      # Set up Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          node-version: '16'  # or your Node.js version
+          flutter-version: '3.10.0'  # Specify your Flutter version here
 
-      # Install dependencies and build the project
-      - name: Install and build
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          else
-            npm install
-          fi
-          npm run build
+      # Build the Flutter project
+      - name: Build Flutter web project
+        run: flutter build web
 
       # Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting
