@@ -18,11 +18,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Ensure this matches your local Node.js version
+          node-version: '18'  # Updated Node.js version to 18
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
 
       - name: Install dependencies
         run: |
-          npm install -g firebase-tools
           if [ -f package-lock.json ]; then
             npm ci
           else
