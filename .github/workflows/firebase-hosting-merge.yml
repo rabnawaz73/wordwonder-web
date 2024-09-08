@@ -12,29 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Updated Node.js version to 18
+          node-version: '18'  # or your Node.js version
 
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools
-
-      - name: Install dependencies
+      # Install dependencies and build the project
+      - name: Install and build
         run: |
           if [ -f package-lock.json ]; then
             npm ci
           else
             npm install
           fi
+          npm run build
 
-      - name: Build the project
-        run: npm run build
-
+      # Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting
         run: firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
