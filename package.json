@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "echo \"Build step is not needed\"",
     "deploy": "firebase deploy"
   },
   "keywords": [],
